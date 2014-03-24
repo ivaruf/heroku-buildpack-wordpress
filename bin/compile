@@ -113,7 +113,8 @@ else
 	download_url ${NEWRELIC_URL}
 fi
 
-tar xz ${NEWRELIC_FILE} -C ${BUILD_DIR}/local
+mkdir -p ${BUILD_DIR}/local
+tar xzf ${NEWRELIC_FILE} -C ${BUILD_DIR}/local
 
 popd > /dev/null
 

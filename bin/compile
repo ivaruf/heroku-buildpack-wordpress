@@ -82,6 +82,28 @@ if [ ! -d ./vendor/php ]; then
   curl --silent --max-time 60 --location $PHP_URL | tar xz
 fi
 
+# newrelic
+echo "-----> Installing newrelic"
+if [ -f "${NEWRELIC_FILE}" ]
+then
+	if check_md5 "${NEWRELIC_FILE}"
+	then
+		echo "Bundling newrelic daemon v${NEWRELIC_VERSION}" | indent
+		echo ${NEWRELIC_URL} | indent
+		download_url ${NEWRELIC_URL}
+	else
+		echo "Using cached newrelic daemon v${NEWRELIC_VERSION}" | indent
+	fi
+else
+	echo "Bundling newrelic daemon v${NEWRELIC_VERSION}" | indent
+	echo ${NEWRELIC_URL} | indent
+	download_url ${NEWRELIC_URL}
+fi
+
+tar xzf ${NEWRELIC_FILE} -C ${BUILD_DIR}/local
+
+popd > /dev/null
+
 # Wordpress
 echo "-----> Installing Wordpress v${WORDPRESS_VERSION}"
 cd ${BUILD_DIR}

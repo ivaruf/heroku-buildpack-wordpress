@@ -158,6 +158,10 @@ for var in \`env | cut -f1 -d=\`; do
 done
 
 touch /app/vendor/nginx/logs/access.log /app/vendor/nginx/logs/error.log /app/vendor/php/var/log/php-fpm.log
+if [ "\${NEW_RELIC_LICENSE_KEY}" ]; then
+	/app/local/bin/newrelic-daemon -c /app/local/etc/newrelic.cfg -d error
+fi
+
 EOF
 chmod +x bin/setup.sh
 

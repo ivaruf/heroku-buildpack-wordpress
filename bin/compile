@@ -67,6 +67,14 @@ function download_url() {
 	curl -s -S -O -L -m 300 --connect-timeout 60 "$TARGET_URL"
 }
 
+function check_md5() {
+	SUMS_FILE="${BUNDLE_DIR}/${MANIFEST_FILE}"
+	TARGET="$1"
+	SUM=`cat "${SUMS_FILE}" | grep "${TARGET}" | cut -d ' ' -f 1`
+	OUTPUT=`md5sum ${BUNDLE_DIR}/${TARGET} | cut -d ' ' -f 1`
+	! [ "$SUM" = "$OUTPUT" ]
+}
+
 BUILD_DIR=$1
 CACHE_DIR=$2
 mkdir -p $BUILD_DIR $CACHE_DIR

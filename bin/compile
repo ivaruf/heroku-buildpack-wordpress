@@ -116,8 +116,6 @@ fi
 mkdir -p ${BUILD_DIR}/local
 tar xzf ${NEWRELIC_FILE} -C ${BUILD_DIR}/local
 
-popd > /dev/null
-
 # Wordpress
 echo "-----> Installing Wordpress v${WORDPRESS_VERSION}"
 cd ${BUILD_DIR}

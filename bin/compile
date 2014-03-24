@@ -62,6 +62,11 @@ function indent() {
   esac
 }
 
+function download_url() {
+	TARGET_URL="$1"
+	curl -s -S -O -L -m 300 --connect-timeout 60 "$TARGET_URL"
+}
+
 BUILD_DIR=$1
 CACHE_DIR=$2
 mkdir -p $BUILD_DIR $CACHE_DIR

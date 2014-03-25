@@ -152,6 +152,7 @@ chmod 755 /app/public/wp-content
 touch /app/vendor/nginx/logs/access.log /app/vendor/nginx/logs/error.log /app/vendor/php/var/log/php-fpm.log /app/vendor/php/var/log/php-errors.log /app/local/var/log/newrelic/newrelic-daemon.log /app/local/var/log/newrelic/php_agent.log
 mkdir -p client_body_temp fastcgi_temp proxy_temp scgi_temp uwsgi_temp
 (tail -f -n 0 /app/vendor/nginx/logs/*.log /app/vendor/php/var/log/*.log /app/local/var/log/newrelic/*.log &)
+mkdir -p /app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212
 
 # Set NEWRELIC key
 if [ -x "/app/local/bin/newrelic-license" ]; then

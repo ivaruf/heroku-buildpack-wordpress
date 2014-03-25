@@ -147,15 +147,17 @@ echo " ... done"
 
 echo "+ Install newrelic..."
 
-local ext_dir=/app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212
 
-find /app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/
 curl -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" | tar xz
 mkdir -p $BUILD_DIR/vendor/newrelic/{bin,etc}
 cd "newrelic-php5-${NEWRELIC_VERSION}-linux"
 
 cp -f "daemon/newrelic-daemon.x64" $BUILD_DIR/vendor/newrelic/bin/newrelic-daemon
-cp -f "agent/x64/newrelic-20121212.so" "${ext_dir}/newrelic.so"
+cp -f "agent/x64/newrelic-20121212.so" "/app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/newrelic.so"
+
+echo "trying to find"
+find /app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/
+echo "and found?
 
 cp -rf /app/config/* /app
 

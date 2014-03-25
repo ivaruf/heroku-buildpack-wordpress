@@ -153,15 +153,15 @@ touch /app/vendor/nginx/logs/access.log /app/vendor/nginx/logs/error.log /app/ve
 mkdir -p client_body_temp fastcgi_temp proxy_temp scgi_temp uwsgi_temp
 (tail -f -n 0 /app/vendor/nginx/logs/*.log /app/vendor/php/var/log/*.log /app/local/var/log/newrelic/*.log &)
 
+# Set NEWRELIC key
+if [ -x "/app/local/bin/newrelic-license" ]; then
+	/app/local/bin/newrelic-license
+fi
+
 if [ "\${NEW_RELIC_LICENSE_KEY}" ]; then
     echo "Launching new relic ... "
     /app/local/bin/newrelic-daemon -c /app/local/etc/newrelic.cfg -d error
 	# ${BUILD_DIR}/local/bin/newrelic-daemon -c ${BUILD_DIR}/local/etc/newrelic.cfg -d error
-fi
-
-# Set NEWRELIC key
-if [ -x "/app/local/bin/newrelic-license" ]; then
-	/app/local/bin/newrelic-license
 fi
 
 # Preserve current php-fpm.conf so that env list does

@@ -40,7 +40,6 @@ if [ -z "$S3_BUCKET" ]; then
   S3_BUCKET=heroku-buildpack-wordpress
 fi
 
-S3_BUCKET_R=heroku-buildpack-php-tyler
 NEWRELIC_VERSION=2.9.5.78
 
 # END CONFIG
@@ -49,9 +48,6 @@ NEWRELIC_VERSION=2.9.5.78
 NGINX_URL="https://s3.amazonaws.com/${S3_BUCKET}/nginx-${NGINX_VERSION}-heroku.tar.gz"
 PHP_URL="https://s3.amazonaws.com/${S3_BUCKET}/php-${PHP_VERSION}-with-fpm-heroku.tar.gz"
 WORDPRESS_URL="http://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz"
-S3_URL_R="https://s3.amazonaws.com/${S3_BUCKET_R}"
-NEWRELIC_FILE="newrelic-${NEWRELIC_VERSION}-heroku.tar.gz"
-NEWRELIC_URL="${S3_URL_R}/${NEWRELIC_FILE}"
 #
 
 function indent() {

@@ -99,6 +99,7 @@ fi
 echo "-----> Installing newrelic"
 curl -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" | tar xz
 mkdir -p $BUILD_DIR/vendor/newrelic/{bin,etc}
+mkdir -p /app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212
 
 cd "newrelic-php5-${NEWRELIC_VERSION}-linux"
 

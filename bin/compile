@@ -155,8 +155,8 @@ mkdir -p client_body_temp fastcgi_temp proxy_temp scgi_temp uwsgi_temp
 
 if [ "\${NEW_RELIC_LICENSE_KEY}" ]; then
     echo "Launching new relic ... "
-	# /app/local/bin/newrelic-daemon -c /app/local/etc/newrelic.cfg -d error
-	${BUILD_DIR}/local/bin/newrelic-daemon -c ${BUILD_DIR}/local/etc/newrelic.cfg -d error
+    /app/local/bin/newrelic-daemon -c /app/local/etc/newrelic.cfg -d error
+	# ${BUILD_DIR}/local/bin/newrelic-daemon -c ${BUILD_DIR}/local/etc/newrelic.cfg -d error
 fi
 
 # Set NEWRELIC key

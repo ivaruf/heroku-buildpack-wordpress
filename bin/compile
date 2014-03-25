@@ -156,6 +156,9 @@ mkdir -p client_body_temp fastcgi_temp proxy_temp scgi_temp uwsgi_temp
 echo "+ Install newrelic..."
 curl -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" | tar xz
 pushd newrelic-php5-${NEWRELIC_VERSION}-linux
+
+apt-get -y install php5-dev
+
 cp -f agent/x64/newrelic-`phpize --version | grep "Zend Module Api No" | tr -d ' ' | cut -f 2 -d ':'`.so `php-config --extension-dir`/newrelic.so
 popd
 

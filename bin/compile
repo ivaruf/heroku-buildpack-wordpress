@@ -102,6 +102,8 @@ cd "newrelic-php5-${NEWRELIC_VERSION}-linux"
 cp -f "daemon/newrelic-daemon.x64" "$BUILD_DIR/vendor/newrelic/bin/newrelic-daemon"
 cp -f "agent/x64/newrelic-20121212.so" "/app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/newrelic.so"
 
+chmod 777 /app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/newrelic.so
+
 echo "trying to find"
 find /app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/
 echo "and found?"

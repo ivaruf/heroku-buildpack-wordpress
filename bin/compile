@@ -97,24 +97,17 @@ fi
 
 # newrelic
 echo "-----> Installing newrelic"
-if [ -f "${NEWRELIC_FILE}" ]
-then
-	if check_md5 "${NEWRELIC_FILE}"
-	then
-		echo "Bundling newrelic daemon v${NEWRELIC_VERSION}" | indent
-		echo ${NEWRELIC_URL} | indent
-		download_url ${NEWRELIC_URL}
-	else
-		echo "Using cached newrelic daemon v${NEWRELIC_VERSION}" | indent
-	fi
-else
-	echo "Bundling newrelic daemon v${NEWRELIC_VERSION}" | indent
-	echo ${NEWRELIC_URL} | indent
-	download_url ${NEWRELIC_URL}
-fi
+curl -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" | tar xz
+mkdir -p $BUILD_DIR/vendor/newrelic/{bin,etc}
 
-mkdir -p ${BUILD_DIR}/local
-tar xzf ${NEWRELIC_FILE} -C ${BUILD_DIR}/local
+cd "newrelic-php5-${NEWRELIC_VERSION}-linux"
+
+cp -f "daemon/newrelic-daemon.x64" $BUILD_DIR/vendor/newrelic/bin/newrelic-daemon"
+cp -f "agent/x64/newrelic-20100525.so" "/app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/newrelic.so"
+
+echo "trying to find"
+find /app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/
+echo "and found?"
 
 # Wordpress
 echo "-----> Installing Wordpress v${WORDPRESS_VERSION}"
@@ -141,20 +134,6 @@ cd ${BUILD_DIR}
 # Setup
 cat >>bin/setup.sh <<EOF
 #!/usr/bin/env bash
-echo "+ Install newrelic..."
-
-curl -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" | tar xz
-mkdir -p $BUILD_DIR/vendor/newrelic/{bin,etc}
-
-cd "newrelic-php5-${NEWRELIC_VERSION}-linux"
-
-cp -f "daemon/newrelic-daemon.x64" $BUILD_DIR/vendor/newrelic/bin/newrelic-daemon"
-cp -f "agent/x64/newrelic-20100525.so" "/app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/newrelic.so"
-
-echo "trying to find"
-find /app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/
-echo "and found?
-
 cp -rf /app/config/* /app
 
 cp /app/vendor/php/php/fpm/status.html /app/public/status.html

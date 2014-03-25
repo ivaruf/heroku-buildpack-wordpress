@@ -152,7 +152,13 @@ chmod 755 /app/public/wp-content
 touch /app/vendor/nginx/logs/access.log /app/vendor/nginx/logs/error.log /app/vendor/php/var/log/php-fpm.log /app/vendor/php/var/log/php-errors.log /app/local/var/log/newrelic/newrelic-daemon.log /app/local/var/log/newrelic/php_agent.log
 mkdir -p client_body_temp fastcgi_temp proxy_temp scgi_temp uwsgi_temp
 (tail -f -n 0 /app/vendor/nginx/logs/*.log /app/vendor/php/var/log/*.log /app/local/var/log/newrelic/*.log &)
-mkdir -p /app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212
+
+echo "+ Install newrelic..."
+curl -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" | tar xz
+pushd newrelic-php5-${NEWRELIC_VERSION}-linux
+cp -f agent/x64/newrelic-`phpize --version | grep "Zend Module Api No" | tr -d ' ' | cut -f 2 -d ':'`.so `php-config --extension-dir`/newrelic.so
+popd
+
 
 # Set NEWRELIC key
 if [ -x "/app/local/bin/newrelic-license" ]; then

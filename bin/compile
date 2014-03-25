@@ -141,19 +141,15 @@ cd ${BUILD_DIR}
 # Setup
 cat >>bin/setup.sh <<EOF
 #!/usr/bin/env bash
-echo "Installing php5-dev"
-apt-get -y install php5-dev
-echo " ... done"
-
 echo "+ Install newrelic..."
-
 
 curl -L "http://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz" | tar xz
 mkdir -p $BUILD_DIR/vendor/newrelic/{bin,etc}
+
 cd "newrelic-php5-${NEWRELIC_VERSION}-linux"
 
 cp -f "daemon/newrelic-daemon.x64" $BUILD_DIR/vendor/newrelic/bin/newrelic-daemon
-cp -f "agent/x64/newrelic-20121212.so" "/app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/newrelic.so"
+cp -f "agent/x64/newrelic-20100525.so" "/app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/newrelic.so"
 
 echo "trying to find"
 find /app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/

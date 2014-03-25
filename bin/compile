@@ -40,7 +40,7 @@ if [ -z "$S3_BUCKET" ]; then
   S3_BUCKET=heroku-buildpack-wordpress
 fi
 
-NEWRELIC_VERSION=2.9.5.78
+NEWRELIC_VERSION=4.6.5.40
 
 # END CONFIG
 
@@ -100,7 +100,7 @@ mkdir -p /app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212
 cd "newrelic-php5-${NEWRELIC_VERSION}-linux"
 
 cp -f "daemon/newrelic-daemon.x64" "$BUILD_DIR/vendor/newrelic/bin/newrelic-daemon"
-cp -f "agent/x64/newrelic-20100525.so" "/app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/newrelic.so"
+cp -f "agent/x64/newrelic-20121212.so" "/app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/newrelic.so"
 
 echo "trying to find"
 find /app/vendor/php/lib/php/extensions/no-debug-non-zts-20121212/

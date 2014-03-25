@@ -151,8 +151,7 @@ fi
 
 if [ "\${NEW_RELIC_LICENSE_KEY}" ]; then
     echo "Launching new relic ... "
-    /app/local/bin/newrelic-daemon -c /app/local/etc/newrelic.cfg -d error
-	# ${BUILD_DIR}/local/bin/newrelic-daemon -c ${BUILD_DIR}/local/etc/newrelic.cfg -d error
+    /app/vendor/newrelic/bin/newrelic-daemon/newrelic-daemon.x64 -d error
 fi
 
 # Preserve current php-fpm.conf so that env list does
